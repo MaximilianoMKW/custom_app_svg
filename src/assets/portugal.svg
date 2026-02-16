@@ -1,0 +1,14 @@
+<svg width="360" height="520" viewBox="0 0 360 520" xmlns="http://www.w3.org/2000/svg">
+  <g id="PT-13" data-region="PT-13">
+    <rect x="120" y="40" width="100" height="120" />
+  </g>
+  <g id="PT-11" data-region="PT-11">
+    <rect x="110" y="180" width="120" height="160" />
+  </g>
+  <g id="PT-30" data-region="PT-30">
+    <polygon points="270,360 330,380 310,440 250,420" />
+  </g>
+  <g id="PT-20" data-region="PT-20">
+    <path d="M30 390 L90 390 L110 450 L50 470 Z" />
+  </g>
+</svg>

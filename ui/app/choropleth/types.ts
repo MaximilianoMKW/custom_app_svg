@@ -2,7 +2,7 @@ export type RegionDatum = {
   regionId: string;
   value: number;
   label?: string;
-  meta?: Record<string, unknown>;
+  thresholds?: Threshold[];
 };
 
 export type Threshold = {
@@ -14,10 +14,13 @@ export type Threshold = {
 
 export type RegionSelectorConfig = {
   selector: string;
-  regionIdAttribute?: 'id' | 'data-region' | string;
+  regionIdAttribute?: string;
 };
 
-export type NumberFormatConfig = {
-  locale: string;
-  maximumFractionDigits?: number;
+export type RegionVisualStyle = {
+  stroke?: string;
+  strokeWidth?: number;
+  opacity?: number;
+  filter?: string;
+  transform?: string;
 };

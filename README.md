@@ -1,85 +1,49 @@
-# Dynatrace Custom App: SVG Choropleth
+# Getting Started with your Dynatrace App
 
-App base em **TypeScript + React (dt-app friendly)** para renderizar mapas SVG como choropleth configurável.
+This project was bootstrapped with Dynatrace App Toolkit.
 
-## Arquitetura proposta
+It uses React in combination with TypeScript, to provide great developer experience.
 
-- `src/components/ChoroplethSvgMap.tsx`: componente principal reutilizável.
-- `src/components/SettingsPanel.tsx`: painel interno para configuração (SVG, thresholds, unidade, mapeamento de IDs).
-- `src/hooks/useDynatraceRegionData.ts`: exemplo de datasource Dynatrace (com mock fallback).
-- `src/lib/color.ts`: função determinística `getColor(value, thresholds)`.
-- `src/lib/svg.ts`: sanitização de SVG + extração/mapeamento de regiões.
-- `src/assets/portugal.svg`: exemplo de mapa local (opção B).
+## Available Scripts
 
-## API do componente
+In the project directory, you can run:
 
-```tsx
-<ChoroplethSvgMap
-  svg={svgSource}
-  data={regionData}
-  thresholds={thresholds}
-  regionSelector={{ selector: 'path, polygon, g', regionIdAttribute: 'id' }}
-  onRegionClick={(region) => console.log(region)}
-  tooltipFormatter={(region, threshold) => `${region?.label}: ${region?.value} (${threshold})`}
-  legend
-/>
-```
+### `npm run start`
 
-## Fontes de SVG suportadas
+Runs the app in the development mode. A new browser window with your running app will be automatically opened.
 
-1. **Inline string (Opção A)**: colar no settings panel.
-2. **Asset local (Opção B)**: `import mapSvg from './assets/map.svg?raw'`.
-3. **URL (Opção C)**: permitido apenas se política de CSP/rede da plataforma autorizar. Em ambientes restritos, use asset local ou armazenamento da plataforma.
+Edit a component file in `ui` and save it. The page will reload when you make changes. You may also see any errors in the console.
 
-## Segurança do SVG
+### `npm run build`
 
-- Sanitização com `DOMPurify` antes de renderizar.
-- Bloqueio explícito de tags/atributos perigosos (`script`, `foreignObject`, `on*` comuns).
-- Recomendação operacional: usar SVG confiável versionado no repositório.
+Builds the app for production to the `dist` folder. It correctly bundles your app in production mode and optimizes the build for the best performance.
 
-## Como lida com IDs inconsistentes
+### `npm run deploy`
 
-- Mapeamento configurável por `id`, `data-region` ou atributo customizado.
-- Regiões sem dado recebem `noDataColor`.
-- Dados com `regionId` ausente no SVG geram `console.warn`, sem quebrar a renderização.
+Builds the app and deploys it to the specified environment in `app.config.json`.
 
-## Thresholds e legenda configuráveis
+### `npm run uninstall
 
-- Thresholds são editáveis no painel em JSON.
-- Legenda pode ser ligada/desligada.
-- Unidade também configurável (`%`, `ms`, `req/s`, etc.).
+Uninstalls the app from the specified environment in `app.config.json`.
 
-## Exemplo de integração Dynatrace Query API
+### `npm run generate:function`
 
-No hook `useDynatraceRegionData`, já existe esqueleto de chamada de query (comentado) com transformação para:
+Generates a new serverless function for your app in the `api` folder.
 
-```ts
-type RegionDatum = { regionId: string; value: number; label?: string; meta?: Record<string, any> }
-```
+### `npm run update`
 
-## Estados de UX tratados
+Updates @dynatrace-scoped packages to the latest version and applies automatic migrations.
 
-- loading
-- error
-- empty
+### `npm run info`
 
-## Como adicionar um novo mapa SVG
+Outputs the CLI and environment information.
 
-1. Coloque arquivo em `src/assets/novo-mapa.svg`.
-2. Importe com `?raw` no `App.tsx`.
-3. Configure `regionIdAttribute` para corresponder ao atributo das regiões (`id`, `data-region`, etc.).
-4. Ajuste `regionSelector.selector` para os elementos relevantes (`path`, `polygon`, `g`).
+### `npm run help`
 
-## Como mapear IDs
+Outputs help for the Dynatrace App Toolkit.
 
-- Se o SVG usa `id="PT-11"`, use `regionIdAttribute: 'id'`.
-- Se usa `data-region="PT-11"`, use `regionIdAttribute: 'data-region'`.
-- Para atributo customizado, informe o nome diretamente (ex.: `regionIdAttribute: 'data-code'`).
+## Learn more
 
-## Rodando localmente
+You can find more information on how to use all the features of the new Dynatrace Platform in [Dynatrace Developer](https://dt-url.net/developers).
 
-```bash
-npm install
-npm run dev
-npm run test
-```
+To learn React, check out the [React documentation](https://reactjs.org/).
